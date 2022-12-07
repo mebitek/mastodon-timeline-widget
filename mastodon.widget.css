@@ -37,7 +37,7 @@
 }
 
 .mt-body {
-	height: 250px;
+	height: 800px;
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 
@@ -81,6 +81,10 @@
 
 .mt-date {
 	text-align: right;
+}
+
+.toot-image {
+    margin-top: 10px;
 }
 
 .mt-date .nsfw {
