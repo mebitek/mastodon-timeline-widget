@@ -1,39 +1,36 @@
-[English version](README_en.md)
+# Mastodon.widget
 
-# Mastodon.widgetについて
+The idea of this little script is to allow users to display their Mastodon timeline on their blog/website.
 
-このJSで作られたウィジェットはあなたのホームページにマストドンのタイムラインを表示します。
-
-## 要件
+## Requirements
 
  - jQuery
- - ウィジェットに表示したいマストドンのインスタンスのアクセストークン
+ - access token from the mastodon instance you want to display the timeline from
 
-設定がしやすい用に、ウィザードを作りましたので、よろしければご利用下さい。  
-[Azet.jpのマストドンウィジェットウィザード](http://www.azet.jp/mastodon.wizard/wizard_jp.html)
+You can use our wizard to generate an access token very easily. Simply follow the link below:  
+[Azet.jp's Mastodon Widget Wizard](http://www.azet.jp/mastodon.wizard/wizard_en.html)
 
-## 設定
+## Installation
 
-1) 必要なファイルをダウンロードをして下さい(CSSファイルとJSファイル).
+1) Download the required files (JS and CSS files in the archive).
 
-2) 下記のコードをホームページに入れてください：
+2) Simply paste the code bellow in you website:
 
 ```html
 <link rel="stylesheet" href="mastodon.widget.css">
 <script type="text/javascript" src="mastodon.widget.js"></script>
-<script type="text/javascript" src="mastodon.widget-jp.js"></script>
 <script>
 	$(document).ready(function() {
 		// jQUERY is required!
 		var mapi = new MastodonApi({
 			target_selector          : '#myTimeline'
-			,instance_uri            : '[マストドンのインスタンスURL]'
-			,access_token            : '[アクセストークン]'
-			,account_id              : '[ユーザのアカウントID]'
+			,instance_uri            : '[MASTODON INSTANCE]'
+			,access_token            : '[ACCESS TOKEN]'
+			,account_id              : '[ACCOUNT ID]'
 			// === optional parameters ===
 			//,toots_limit           : 5
-			// 下記のサンプルはhttp://fontawesome.io使用
-			//,pic_icon              : '<i class="fa fa-picture-o"></i>' 
+			// samples below require http://fontawesome.io
+			//,pic_icon              : '<i class="fa fa-picture-o"></i>'
 			//,boosts_count_icon     : '<i class="fa fa-retweet"></i>'
 			//,favourites_count_icon : '<i class="fa fa-star"></i>'
 		});
@@ -41,60 +38,48 @@
 </script>
 ```
 
-上記のサンプルコードに、下記の情報を正しく設定して下さい：
+In the sample above, you have to replace the folowing:
 
- - [マストドンのインスタンスURL] => 例: https://mastodon.technology
- - [アクセストークン] => マストドンのインスタンスのアクセストークン
- - [ユーザのアカウントID]   => タイムラインの表示したいユーザのID
+ - [MASTODON INSTANCE] => i.e : https://mastodon.technology
+ - [ACCESS TOKEN] => token you created for your app and linked with your Mastodon instance account
+ - [ACCOUNT ID]   => your user ID on Mastodon instance
 
-3) タイムラインの為に、DIVのコンテナを追加して下さい：
+3) Add a container for your timeline where you want in the body of your website:
 
 ```html
     <div id="myTimeline" class="mastodon-timeline mastodon-timeline-dark"></div>
 ```
 
-`mastodon-timeline-dark` の代わりに、 `mastodon-timeline-light` のテーマも用意しております。
+Instead of the theme `mastodon-timeline-dark`, we provide a light theme `mastodon-timeline-light` as well.
 
-### パラメータ一覧
+### Available parameters
 
-下記のパラメータが任意です。
+The parameters below are optional.
 
-| パラメータ名          | 規定         | 説明 |
-|---                    |---           |---   |
-| toots_limit           | 20           | 最大トゥーツ表示数 |
-| pic_icon              | [picture]    | 画像のアイコン |
-| boosts_count_icon     | [boost]      | ブースト数のステータスタイトル|
-| favourites_count_icon | [favourite]  | お気に入り数のステータスタイトル|
+| Parameter name        | Default      | Explanation |
+|---                    |----          |---          |
+| toots_limit           | 20           | maximum number of visible toots |
+| pic_icon              | [picture]    | icon to be displayed when medias are attached |
+| boosts_count_icon     | [boost]      | boosts count status header entry |
+| favourites_count_icon | [favourite]  | favourites count status header entry |
 
-`pic_icon` の場合は、`<img src="mypicicon.gif" />` のような設定ができます。  
-[font-awesome](http://fontawesome.io)をご利用の方は`<i class="fa fa-picture-o"></i>` を設定もできます。  
-同じく、 `boosts_count_icon` と `favourites_count_icon` の設定もできます。
+Regarding `pic_icon`, you can use an image you have on your server like so: `<img src="mypicicon.gif" />`.  
+Or you can also use [font-awesome](http://fontawesome.io) and set `<i class="fa fa-picture-o"></i>`.  
+Same goes for `boosts_count_icon` and `favourites_count_icon`.
 
-## カスタマイズ
+## Customization
 
-### テーマ
-
-以下の2つのテーマが用意されております：
+You have the choice between 2 basic themes:
 
  - mastodon-timeline-light
  - mastodon-timeline-dark
 
-又は、オリジナルテーマ作成も可能です。詳しくはCSSファイルを参照下さい。
+Or you can create your own. Please have a look in the CSS file for more details.
 
-### フォント
+### Languages supported
 
-他のフォントを使いたい方にはGoogleの`Noto Sans Japanese`フォントを準備させて頂きました。  
-下記のHTMLを追加して下さい：(`HEAD`タグの中に、`mastodon.widget.css`の前に)
-
-```html
-<!-- Noto Sans Japanese -->
-<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css">
-```
-
-### 言語サポート
-
-別JSファイルで英語以外の設定もできます。  
-例えば、日本語用のファイル`mastodon.widget-jp.js`には下記の設定が含めております：
+In a separate file, you can setup the text to support a different language.  
+For example, in the Japanese file `mastodon.widget-jp.js` we can find the folowing settings:
 
 ```javascript
 MastodonApi.text = {
@@ -105,4 +90,4 @@ MastodonApi.text = {
 };
 ```
 
-`mastodon.widget.js`の後で、`<script>`タグを読み込んで下さい。
+Please be sure to insert the translation javascript file `<script>` tag after `mastodon.widget.js`.
